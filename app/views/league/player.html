@@ -1,0 +1,16 @@
+<h2> <%= @player.name %> </h2>
+
+<h3>Games</h3>
+<table style='width: 400px'>
+  <tr> <th>Week</th> <th>H/A</th> <th>Opponent</th> <th>Result</th></tr>
+  <% @player.games.each do |game| %>
+  <% opponent = game.opponent(@player) %>
+  <% location = @player.team == game.match.home_team ? 'Home' : 'Away' %>
+    <tr>
+      <td> <%= game.match.week.number %> </td>
+      <td> <%= link_to location, "/match/#{game.match.id}" %> </td>
+      <td> <%= link_to opponent.name, "/player/#{opponent.id}" %> </td>
+      <td> <%= game.won?(@player) ? 'W' : 'L' %> </td>
+    </tr>
+  <% end %>
+</table>

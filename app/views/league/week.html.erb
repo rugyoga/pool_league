@@ -1,0 +1,15 @@
+<h1> <%= League.last.name %> </h1>
+<h2> Week <%= @week.number %> </h2>
+<table>
+  <tr> <th>Home</th> <th>W</th><th>L</th><th>Away</th> </tr>
+  <% @matches.each do |match| %>
+    <tr>
+      <td> <%= match.home_team.name %> </td>
+      <td> <%= match.home_wins.count %> </td>
+      <td> <%= match.away_wins.count %> </td>
+      <td> <%= match.away_team.name %> </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "Standings", '/' %>

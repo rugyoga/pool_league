@@ -1,0 +1,20 @@
+<h1>Guy's SFPA League Simulator</h1>
+
+Current week: <%= Week.count %>
+
+<h2>Standings</h2>
+
+<table>
+<tr><th>Team</th><th>Match points</th><th>Games won</th></tr>
+  <% @teams.sort_by{|t| [t[:match_points], t[:games_won]] }.reverse.each do |team| %>
+  <tr>
+    <td> <%= link_to team[:name], "/team/#{team[:id]}" %> </td>
+    <td> <%= team[:match_points] %> </td>
+    <td> <%= team[:games_won] %> </td>
+  </tr>
+  <% end %>
+</table>
+
+<% if Week.count == 0 || Week.last == @week %>
+<%= button_to 'Generate pairings', {:controller => "league", :action => "generate_pairings"} , :method=>:post  %>
+<% end %>

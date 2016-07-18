@@ -1,0 +1,14 @@
+<h1> <%= League.last.name %> </h1>
+<h2> Week <%= @week.number %> </h2>
+<table>
+  <tr> <th>Home</th> <th>Away</th> <th>Venue</th> </tr>
+  <% @matches.each do |match| %>
+    <tr>
+      <td> <%= match.home_team.name %> </td>
+      <td> <%= match.away_team.name %> </td>
+      <td> <%= match.venue.name %> </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= button_to 'Simulate matches', {:controller => "league", :action => "simulate_matches"} , :method=>:post  %>

@@ -1,0 +1,31 @@
+<h2> <%= @team.name %> </h2>
+<h3>Roster</h3>
+<table style='width: 250px'>
+  <tr><th style='width: 100px'>Player</th><th style='width: 20px'>W</th><th style='width: 20px'>L</th><th style='width: 30px'>%</th></tr>
+  <% @team.players.each do |player| %>
+  <% wins, losses = player.wins.count, player.losses.count %>
+    <tr>
+      <td><%= link_to player.name, "/player/#{player.id}"%></td>
+      <td><%= wins %></td>
+      <td><%= losses %></td>
+      <td><%= number_to_percentage( wins + losses == 0 ? 0.0 : (100.0*wins)/(wins+losses), precision: 1) %> </td>
+    </tr>
+  <% end %>
+</table>
+
+<h3>Matches</h3>
+<table style='width: 400px'>
+  <tr> <th>Week</th> <th>H/A</th> <th>Opponent</th> <th>Score</th></tr>
+  <% @team.matches.each do |match| %>
+    <tr>
+      <td> <%= match.week.number %> </td>
+      <% if @team == match.home_team %>
+        <td> Home </td>
+      <% else %>
+        <td> Away </td>
+      <% end %>
+      <td> <%= link_to match.away_team.name, "/team/#{match.away_team.id}" %> </td>
+      <td> <%= link_to "#{match.wins_by(@team)}-#{match.losses_by(@team)}", "/matches/#{match.id}" %> </td>
+    </tr>
+  <% end %>
+</table>
