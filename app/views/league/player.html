@@ -1,5 +1,11 @@
 <h2> <%= @player.name %> </h2>
 
+<h3>Summary</h3>
+<table>
+  <tr><td>Wins</td><td>Losses</td><td>%</td><td>TR</td></tr>
+  <tr><td><%=@player.no_of_wins%></td><td><%=@player.no_of_losses%></td><td><%=@player.win_percentage%></td><td><%=@player.no_of_table_runs%></td></tr>
+</table>
+
 <h3>Games</h3>
 <table style='width: 400px'>
   <tr> <th>Week</th> <th>H/A</th> <th>Opponent</th> <th>Result</th></tr>
